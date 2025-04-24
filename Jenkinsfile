@@ -36,7 +36,10 @@ pipeline {
         stage('Deploy to k8s'){
             steps{
                 script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
+                   // kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
+                    withKubeConfig(caCertificate: '', clusterName: 'test-cluster', contextName: 'new-context', credentialsId: 'kubernetes', namespace: 'tester', restrictKubeConfigAccess: false, serverUrl: 'https://127.0.0.1:53752') {
+    // some block
+}
                 }
             }
         }   
